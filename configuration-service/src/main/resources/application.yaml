@@ -11,7 +11,4 @@ spring:
           force-pull: true
           searchPaths: config/{application}/{profile}/
           clone-on-start: true
-          default-label: config-branch
-
-
-
+          default-label: develop-config-branch
