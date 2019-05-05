@@ -1,10 +1,65 @@
+---
+# This default profile is used when running a single instance completely standalone:
+# https://o7planning.org/ru/11733/understanding-spring-cloud-eureka-server-with-example
+spring:
+  profiles: dev
 server:
   port: 8087
 eureka:
+  instance:
+    hostname: localhost
   client:
     registerWithEureka: false     # Don’t register with Eureka service.
     fetchRegistry: false          # Don’t cache registry information locally.
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
     waitTimeInMsWhenSyncEmpty: 5  # Initial time to wait before server takes requests
                                   # By default 5 minutes
                                   # and wait for 3 requests every 10 sec
+---
+spring:
+  profiles: wind
+  application:
+    name: eureka-server-register-clustered   # ==> This is Service-Id
+server:
+  port: 9001
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9002/eureka/,http://localhost:9003/eureka/
+---
+spring:
+  profiles: water
+  application:
+    name: eureka-server-register-clustered  # ==> This is Service-Id
+server:
+  port: 9002
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/,http://localhost:9003/eureka/
+
+---
+spring:
+  profiles: fire
+  application:
+    name: eureka-server-register-clustered   # ==> This is Service-Id
+server:
+  port: 9003
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/,http://localhost:9002/eureka/
