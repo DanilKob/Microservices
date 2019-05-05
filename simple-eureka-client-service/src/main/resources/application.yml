@@ -1,9 +1,11 @@
 ---
 eureka:
   instance:
+    preferIpAddress: true
     appname: ${spring.application.name}  # ==> This is a instance of ABC-SERVICE
   client:
     fetchRegistry: true
+    registerWithEureka: true
 ---
 spring:
   profiles: dev
