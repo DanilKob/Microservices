@@ -1,0 +1,14 @@
+# https://cloud.spring.io/spring-cloud-config/multi/multi__spring_cloud_config_server.html
+server:
+  port: 8085
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/DanilKob/Microservices
+          skipSslValidation: true
+          force-pull: true
+          searchPaths: config/{application}/{profile}/
+          clone-on-start: true
+          default-label: develop-config-branch
