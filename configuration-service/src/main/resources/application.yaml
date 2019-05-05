@@ -12,3 +12,11 @@ spring:
           searchPaths: config/{application}/{profile}/
           clone-on-start: true
           default-label: develop-config-branch
+eureka:
+  instance:
+    preferIpAddress: true     #Register the IP of the service #rather than the server name.
+  client:
+    registerWithEureka: true  #Register the service with Eureka.
+    fetchRegistry: true       #Pull down a local copy of the registry.
+    serviceUrl:
+      defaultZone: http://localhost:8087/eureka/  #Location of the Eureka Service
