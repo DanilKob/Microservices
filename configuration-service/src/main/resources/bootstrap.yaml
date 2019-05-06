@@ -1,3 +1,4 @@
+---
 spring:
   application:
     name:
@@ -14,33 +15,3 @@ spring:
 encrypt:
   key:
     secretkeyforencryption
-
-### Eureka client setup
-eureka:
-  instance:
-    preferIpAddress: true     #Register the IP of the service #rather than the server name.
-  client:
-    registerWithEureka: true  #Register the service with Eureka.
-    fetchRegistry: true       #Pull down a local copy of the registry.
----
-spring:
-  profiles: dev
-eureka:
-  instance:
-    appname: ${spring.application.name}
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:9000/eureka/  #Location of the Eureka Service
-server:
-  port: 8085
----
-spring:
-  profiles: clustered-instance1
-eureka:
-  instance:
-    appname: ${spring.application.name}
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:9001/eureka/  #Location of the Eureka Service
-server:
-  port: 8085
