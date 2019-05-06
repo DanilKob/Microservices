@@ -1,0 +1,35 @@
+---
+eureka:
+  instance:
+    preferIpAddress: true
+    appname: ${spring.application.name}  # ==> This is a instance of ABC-SERVICE
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka
+server:
+  port: 8021
+---
+spring:
+  profiles: instance1
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka
+server:
+  port: 8001
+---
+spring:
+  profiles: instance2
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka
+server:
+  port: 8002
