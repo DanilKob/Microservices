@@ -1,0 +1,14 @@
+spring:
+  profiles: fire
+  application:
+    name: eureka-server-register-clustered   # ==> This is Service-Id
+server:
+  port: 9003
+eureka:
+  instance:
+    hostname: eureka-rigister-service-fire
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-rigister-service-wind:9001/eureka/,http://eureka-rigister-service-water:9002/eureka/
