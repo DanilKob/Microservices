@@ -8,23 +8,23 @@ eureka:
 zuul:
   routes:
     configuration-service:
-      path: /configuration-service/**
+      path: /configuration/**
       sensitive-headers: Set-Cookie,Authorization
     eureka-service-register:
       path: /eureka-service-register/**
       sensitive-headers: Set-Cookie,Authorization
 hystrix:
-    command:
-      configuration-service:
-        execution:
-          isolation:
-            thread:
-              timeoutInMilliseconds=600000
-      eureka-service-register:
-        execution:
-          isolation:
-            thread:
-              timeoutInMilliseconds=600000
+  command:
+    configuration-service:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds=600000
+    eureka-service-register:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds=600000
 ---
 spring:
   profiles: cluster

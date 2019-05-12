@@ -8,7 +8,7 @@ eureka:
 zuul:
   routes:
     configuration-service:
-      path: /configuration-service/**
+      path: /configuration/**
       sensitive-headers: Set-Cookie,Authorization
     eureka-service-register:
       path: /eureka-service-register/**
