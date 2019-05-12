@@ -26,12 +26,12 @@ server:
   port: 9001
 eureka:
   instance:
-    hostname: localhost
+    hostname: eureka-rigister-service-wind
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:9002/eureka/,http://localhost:9003/eureka/
+      defaultZone: http://eureka-rigister-service-water:9002/eureka/,http://eureka-rigister-service-fire:9003/eureka/
 ---
 spring:
   profiles: water
@@ -41,12 +41,12 @@ server:
   port: 9002
 eureka:
   instance:
-    hostname: localhost
+    hostname: eureka-rigister-service-water
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:9001/eureka/,http://localhost:9003/eureka/
+      defaultZone: http://eureka-rigister-service-wind:9001/eureka/,http://eureka-rigister-service-fire:9003/eureka/
 
 ---
 spring:
@@ -57,9 +57,9 @@ server:
   port: 9003
 eureka:
   instance:
-    hostname: localhost
+    hostname: eureka-rigister-service-fire
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:9001/eureka/,http://localhost:9002/eureka/
+      defaultZone: http://eureka-rigister-service-wind:9001/eureka/,http://eureka-rigister-service-water:9002/eureka/
