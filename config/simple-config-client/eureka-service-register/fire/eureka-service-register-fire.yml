@@ -6,9 +6,9 @@ server:
   port: 9003
 eureka:
   instance:
-    hostname: eureka-rigister-service-fire
+    hostname: eureka-register-service-fire
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://eureka-rigister-service-wind:9001/eureka/,http://eureka-rigister-service-water:9002/eureka/
+      defaultZone: http://eureka-register-service-wind:9001/eureka/,http://eureka-register-service-water:9002/eureka/
