@@ -16,8 +16,6 @@ zuul:
 hystrix:
   command:
     configuration-service:
-      ribbon:
-        ReadTimeout: 15000
       execution:
         isolation:
           thread:
