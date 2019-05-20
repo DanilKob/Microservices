@@ -41,12 +41,12 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
-  eureka:
-    instance:
-      preferIpAddress: true
-      appname: ${spring.application.name}  # ==> This is a instance of ABC-SERVICE
-    client:
-      serviceUrl:
-        defaultZone:  http://localhost:5555/eureka-service-register
-      fetchRegistry: true
-      registerWithEureka: true
+eureka:
+  instance:
+    preferIpAddress: true
+    appname: ${spring.application.name}  # ==> This is a instance of ABC-SERVICE
+  client:
+    serviceUrl:
+      defaultZone:  http://localhost:5555/eureka-service-register
+    fetchRegistry: true
+    registerWithEureka: true
