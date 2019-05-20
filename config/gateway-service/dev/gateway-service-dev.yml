@@ -16,6 +16,8 @@ zuul:
 hystrix:
   command:
     configuration-service:
+      ribbon:
+        ReadTimeout: 15000
       execution:
         isolation:
           thread:
@@ -24,7 +26,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 10000
+            timeoutInMilliseconds: 25000
 ---
 spring:
   profiles: dev
