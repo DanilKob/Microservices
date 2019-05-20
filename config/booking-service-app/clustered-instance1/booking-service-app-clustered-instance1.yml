@@ -1,0 +1,4 @@
+spring:
+  profiles: clustered-instance1
+server:
+  port: 9045
