@@ -48,6 +48,6 @@ eureka:
     appname: ${spring.application.name}  # ==> This is a instance of ABC-SERVICE
   client:
     serviceUrl:
-      defaultZone:  http://localhost:5555/eureka-service-register
+      defaultZone:  http://localhost:5555/eureka-service-register/eureka
     fetchRegistry: true
     registerWithEureka: true
