@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: booking-service-app
+  profiles:
+    active: dev,basic
+  cloud:
+    config:
+      uri:  http://localhost:5555/configuration
+      profile: ${spring.profiles.active}
+encrypt:
+  key:
+    secretkeyforencryption
