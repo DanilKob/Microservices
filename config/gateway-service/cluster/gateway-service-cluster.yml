@@ -19,12 +19,12 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 10000
+            timeoutInMilliseconds: 25000
     eureka-service-register:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 25000
+            timeoutInMilliseconds: 5000
 ---
 spring:
   profiles: cluster
