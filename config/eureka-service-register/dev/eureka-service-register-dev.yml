@@ -2,6 +2,8 @@
 # https://o7planning.org/ru/11733/understanding-spring-cloud-eureka-server-with-example
 spring:
   profiles: dev
+  application:
+    name: eureka-service-register
 server:
   port: 8087
 eureka:
