@@ -1,0 +1,8 @@
+spring:
+  profiles: basic
+  datasource:
+    password: bigbear
+    url: jdbc:postgresql://localhost:5432/auth?currentSchema=oauth_clients
+    username: stronguser
+server:
+  port: 9999
