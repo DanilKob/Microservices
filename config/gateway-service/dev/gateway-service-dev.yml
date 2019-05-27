@@ -23,7 +23,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 25000
+            timeoutInMilliseconds: 60000
     eureka-service-register:
       execution:
         isolation:
