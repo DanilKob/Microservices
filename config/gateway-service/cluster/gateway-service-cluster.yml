@@ -33,6 +33,9 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 5000
+  ReadTimeout: 60000
 ---
 spring:
   profiles: cluster
