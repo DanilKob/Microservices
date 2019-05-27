@@ -1,0 +1,24 @@
+server:
+  port: 9999
+spring:
+  profiles: basic
+  datasource:
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 30000
+      maxLifetime: 2000000
+      maximumPoolSize: 20
+      minimumIdle: 5
+      poolName: SpringBootJPAHikariCP
+    password: bigbear
+    platform: postgres
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/auth?currentSchema=oauth_clients
+    username: stronguser
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation=true: true
