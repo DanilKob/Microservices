@@ -18,7 +18,7 @@ zuul:
       sensitive-headers: Set-Cookie,Authorization
 ribbon:
   ConnectTimeout: 2000
-  ReadTimeout: 10000
+  ReadTimeout: 60000
 ---
 spring:
   profiles: cluster
