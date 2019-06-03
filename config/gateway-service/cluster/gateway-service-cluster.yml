@@ -16,6 +16,9 @@ zuul:
     auth-service:
       path: /auth-service/**
       sensitive-headers: Set-Cookie,Authorization
+    booking-app:
+      path: /booking/**
+      sensitive-headers: Set-Cookie,Authorization
 configuration-service:
   ribbon:
     ConnectTimeout: 2000
