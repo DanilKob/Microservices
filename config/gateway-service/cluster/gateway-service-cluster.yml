@@ -13,18 +13,16 @@ zuul:
     eureka-service-register:
       path: /eureka-service-register/**
       sensitive-headers: Set-Cookie,Authorization
-hystrix:
-  command:
-    configuration-service:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 25000
-    eureka-service-register:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 10000
+    auth-service:
+      path: /auth-service/**
+      sensitive-headers: Set-Cookie
+    booking-service-app:
+      path: /booking/**
+      sensitive-headers: Set-Cookie
+configuration-service:
+  ribbon:
+    ConnectTimeout: 2000
+    ReadTimeout: 90000
 ---
 spring:
   profiles: cluster

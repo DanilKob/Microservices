@@ -1,0 +1,8 @@
+spring:
+  profiles: basic
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth?currentSchema=oauth_clients
+    password: '{cipher}577c6472188cbe6b980bce1e72c94fb6ed82d8245f892ec35016f4095e87eeaa'
+    username: '{cipher}0bd0089a8d2d2308792cb0c07595c33c7f1cd5eeb344784e7ce6f59c3c7b6c8f'
+server:
+  port: 9999
