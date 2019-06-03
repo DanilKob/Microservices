@@ -1,5 +1,3 @@
-server:
-  port: 9999
 spring:
   profiles: basic
   datasource:
@@ -10,11 +8,8 @@ spring:
       maximumPoolSize: 20
       minimumIdle: 5
       poolName: SpringBootJPAHikariCP
-    password: bigbear
     platform: postgres
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/auth?currentSchema=oauth_clients
-    username: stronguser
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
@@ -22,3 +17,12 @@ spring:
         jdbc:
           lob:
             non_contextual_creation=true: true
+eureka:
+  instance:
+    preferIpAddress: true
+    appname: ${spring.application.name}  # ==> This is a instance of ABC-SERVICE
+  client:
+    serviceUrl:
+      defaultZone:  http://localhost:5555/eureka-service-register/eureka
+    fetchRegistry: true
+    registerWithEureka: true
