@@ -15,7 +15,7 @@ zuul:
       sensitive-headers: Set-Cookie,Authorization
     auth-service:
       path: /auth-service/**
-      sensitive-headers: Set-Cookie,Authorization
+      sensitive-headers: Set-Cookie
     booking-app:
       path: /booking/**
       sensitive-headers: Set-Cookie
