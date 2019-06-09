@@ -16,24 +16,14 @@ zuul:
     auth-service:
       path: /auth-service/**
       sensitive-headers: Set-Cookie,Authorization
-
-hystrix:
-  command:
-    configuration-service:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 60000
-    eureka-service-register:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 10000
-    auth-service:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 5000
+configuration-service:
+  ribbon:
+    ConnectTimeout: 2000
+    ReadTimeout: 90000
+auth-service:
+  ribbon:
+    ConnectTimeout: 2000
+    ReadTimeout: 10000
 ---
 spring:
   profiles: dev

@@ -23,6 +23,10 @@ configuration-service:
   ribbon:
     ConnectTimeout: 2000
     ReadTimeout: 90000
+auth-service:
+  ribbon:
+    ConnectTimeout: 2000
+    ReadTimeout: 10000
 ---
 spring:
   profiles: cluster
