@@ -1,5 +1,7 @@
 package home.project.authservice.entity;
 
+import home.project.crossserviceapi.auth.entity.FullName;
+
 import java.util.List;
 
 public class UserDetailsEntity {

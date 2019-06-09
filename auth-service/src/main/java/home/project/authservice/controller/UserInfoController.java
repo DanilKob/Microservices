@@ -1,6 +1,6 @@
 package home.project.authservice.controller;
 
-import home.project.authservice.entity.UserDetailsPrincipal;
+import home.project.crossserviceapi.auth.entity.UserDetailsPrincipal;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;

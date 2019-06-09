@@ -1,12 +1,11 @@
 package home.project.authservice.repository.impl;
 
-import home.project.authservice.entity.FullName;
 import home.project.authservice.entity.UserDetailsEntity;
-import home.project.authservice.entity.UserDetailsPrincipal;
 import home.project.authservice.repository.UserDetailsRepository;
+import home.project.crossserviceapi.auth.entity.FullName;
+import home.project.crossserviceapi.auth.entity.UserDetailsPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,12 +25,12 @@ public class UserDetailsRepositoryImpl implements UserDetailsRepository {
 
     private static final String SELECT_USER_DETAILS_BY_USER_NAME =
             "select * from ( " +
-            "   select * from users_scheme.users " +
-            "   where " +
-            "   username = ? " +
-            ") as selected_username\n" +
-            "join users_scheme.user_roles\n" +
-            "on users_scheme.user_roles.username = selected_username.username";
+                    "   select * from users_scheme.users " +
+                    "   where " +
+                    "   username = ? " +
+                    ") as selected_username\n" +
+                    "join users_scheme.user_roles\n" +
+                    "on users_scheme.user_roles.username = selected_username.username";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String AUTHORITY = "authority";
@@ -96,7 +95,7 @@ public class UserDetailsRepositoryImpl implements UserDetailsRepository {
         FullName fullName = new FullName(firstName, middleName, lastName);
         List<String> authorities = new LinkedList<>();
         authorities.add(resultSet.getString(AUTHORITY));
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             authorities.add(resultSet.getString(AUTHORITY));
         }
         UserDetailsEntity userDetailsEntity = new UserDetailsEntity();
@@ -108,7 +107,7 @@ public class UserDetailsRepositoryImpl implements UserDetailsRepository {
         return userDetailsEntity;
     }
 
-    private String[] authoritiesListToArray(List<String> authorities){
+    private String[] authoritiesListToArray(List<String> authorities) {
         return authorities.toArray(new String[authorities.size()]);
     }
 }
