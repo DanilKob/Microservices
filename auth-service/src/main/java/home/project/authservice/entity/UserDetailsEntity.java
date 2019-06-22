@@ -8,6 +8,7 @@ public class UserDetailsEntity {
     private String username;
     private String password;
     private FullName fullName;
+    private boolean isEnabled;
     private String externalData;
     private List<String> authorities;
 
@@ -49,5 +50,13 @@ public class UserDetailsEntity {
 
     public void setExternalData(String externalData) {
         this.externalData = externalData;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }

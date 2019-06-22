@@ -1,6 +1,7 @@
 package home.project.authservice.repository.impl;
 
 import home.project.authservice.entity.UserDetailsEntity;
+import home.project.authservice.exceptions.UserRepositoryException;
 import home.project.authservice.repository.UserDetailsRepository;
 import home.project.crossserviceapi.auth.entity.FullName;
 import home.project.crossserviceapi.auth.entity.UserDetailsPrincipal;
@@ -31,6 +32,19 @@ public class UserDetailsRepositoryImpl implements UserDetailsRepository {
                     ") as selected_username\n" +
                     "join users_scheme.user_roles\n" +
                     "on users_scheme.user_roles.username = selected_username.username";
+
+    private static final String INSERT_USER =
+            "insert into users_scheme.users " +
+                    "(username, password, first_name, middle_name, last_name, enabled) " +
+                    "values " +
+                    "(?, ?, ?,?,?, ?) ";
+
+    private static final String INSERT_AUTHORITIES =
+            "insert into users_scheme.user_roles " +
+                    "(username, authority) " +
+                    "values " +
+                    "(?, ?)";
+
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String AUTHORITY = "authority";
@@ -79,6 +93,41 @@ public class UserDetailsRepositoryImpl implements UserDetailsRepository {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new UsernameNotFoundException("SQL Exception");
+        }
+    }
+
+    @Override
+    public UserDetailsEntity addUser(UserDetailsEntity userDetailsEntity) throws UserRepositoryException {
+        try(Connection connection = dataSource.getConnection()){
+            String username = userDetailsEntity.getUsername();
+            String password = userDetailsEntity.getPassword();
+            FullName fullName = userDetailsEntity.getFullName();
+            boolean enabled = userDetailsEntity.isEnabled();
+            List<String> authorities = userDetailsEntity.getAuthorities();
+            connection.setAutoCommit(false);
+            PreparedStatement insertUserStatement = connection.prepareStatement(INSERT_USER);
+            PreparedStatement insertAuthorityStatement = connection.prepareStatement(INSERT_AUTHORITIES);
+            insertUserStatement.setString(1, username);
+            insertUserStatement.setString(2, password);
+            insertUserStatement.setString(3, fullName.getFirstName());
+            insertUserStatement.setString(4, fullName.getMiddleName());
+            insertUserStatement.setString(5, fullName.getLastName());
+            insertUserStatement.setBoolean(6, enabled);
+            insertUserStatement.executeUpdate();
+
+            for (String authority : authorities) {
+                insertAuthorityStatement.setString(1, username);
+                insertAuthorityStatement.setString(2, authority);
+                insertAuthorityStatement.addBatch();
+            }
+            insertAuthorityStatement.executeBatch();
+
+            connection.commit();
+
+            return userDetailsEntity;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new UserRepositoryException(e);
         }
     }
 
