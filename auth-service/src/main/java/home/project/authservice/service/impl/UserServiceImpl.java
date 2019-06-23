@@ -3,6 +3,7 @@ package home.project.authservice.service.impl;
 import home.project.authservice.constants.AuthorityConstants;
 import home.project.authservice.dto.UserDTO;
 import home.project.authservice.entity.UserDetailsEntity;
+import home.project.authservice.exceptions.DuplicateUserNameException;
 import home.project.authservice.exceptions.UserRepositoryException;
 import home.project.authservice.repository.UserDetailsRepository;
 import home.project.authservice.service.UserService;
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(UserDTO userDTO) throws UserRepositoryException {
+    public void addUser(UserDTO userDTO) throws UserRepositoryException, DuplicateUserNameException {
         String username = userDTO.getUsername();
         String password = userDTO.getPassword();
         String firstName = userDTO.getFirstName();

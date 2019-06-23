@@ -1,6 +1,7 @@
 package home.project.authservice.repository.impl;
 
 import home.project.authservice.entity.UserDetailsEntity;
+import home.project.authservice.exceptions.DuplicateUserNameException;
 import home.project.authservice.exceptions.UserRepositoryException;
 import home.project.authservice.repository.UserDetailsRepository;
 import home.project.crossserviceapi.auth.entity.FullName;
@@ -37,7 +38,9 @@ public class UserDetailsRepositoryImpl implements UserDetailsRepository {
             "insert into users_scheme.users " +
                     "(username, password, first_name, middle_name, last_name, enabled) " +
                     "values " +
-                    "(?, ?, ?,?,?, ?) ";
+                    "(?, ?, ?,?,?, ?) " +
+                    "ON CONFLICT ON CONSTRAINT users_pkey " +
+                    "DO NOTHING ";
 
     private static final String INSERT_AUTHORITIES =
             "insert into users_scheme.user_roles " +
@@ -97,8 +100,8 @@ public class UserDetailsRepositoryImpl implements UserDetailsRepository {
     }
 
     @Override
-    public UserDetailsEntity addUser(UserDetailsEntity userDetailsEntity) throws UserRepositoryException {
-        try(Connection connection = dataSource.getConnection()){
+    public UserDetailsEntity addUser(UserDetailsEntity userDetailsEntity) throws UserRepositoryException, DuplicateUserNameException {
+        try (Connection connection = dataSource.getConnection()) {
             String username = userDetailsEntity.getUsername();
             String password = userDetailsEntity.getPassword();
             FullName fullName = userDetailsEntity.getFullName();
@@ -113,7 +116,10 @@ public class UserDetailsRepositoryImpl implements UserDetailsRepository {
             insertUserStatement.setString(4, fullName.getMiddleName());
             insertUserStatement.setString(5, fullName.getLastName());
             insertUserStatement.setBoolean(6, enabled);
-            insertUserStatement.executeUpdate();
+            int updatedRows = insertUserStatement.executeUpdate();
+            if (updatedRows == 0) {
+                throw new DuplicateUserNameException();
+            }
 
             for (String authority : authorities) {
                 insertAuthorityStatement.setString(1, username);

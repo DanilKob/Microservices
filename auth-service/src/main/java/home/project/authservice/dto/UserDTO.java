@@ -1,10 +1,8 @@
 package home.project.authservice.dto;
 
-import com.sun.istack.NotNull;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 public class UserDTO {
     @NotBlank
